@@ -28,7 +28,7 @@ let questions = [{
         "answer-2": "*.www",
         "answer-3": "*.png *.gif",
         "answer-4": "*.html *.htm",
-        "right-answer": 3
+        "right-answer": 4
     },
     {
         "question": "Wofür ist HTML zuständig?",
@@ -36,7 +36,7 @@ let questions = [{
         "answer-2": "Inhalt des Dokumentes",
         "answer-3": "Design",
         "answer-4": "Logik",
-        "right-answer": 3
+        "right-answer": 2
     },
     {
         "question": "Mit welchem HTML-Element wird ein Text kursiv geschrieben?",
@@ -48,7 +48,7 @@ let questions = [{
     },
 ];
 
-let currentQuestion = 0;
+let currentQuestion = 4;
 
 // führt alle fuctionen aus beim laden der Seite
 function init() {
@@ -82,15 +82,18 @@ function showAnswer() {
     document.getElementById('answer-4').innerHTML = showAnswer['answer-4'];
 }
 
-function answer(selection) {
-    let answer = questions[currentQuestion];
-    let rightAnswer = answer['right-answer'];
-    let selectedAnswer = selection.slice(-1);
-    if (rightAnswer == selectedAnswer) {
-        document.getElementById(selection).parentNode.classList.add('right-answer');
+function answer(selection) { // funktion ANSWER erstellt und mit STRING parameter übergeben. 
+    let answer = questions[currentQuestion]; // las answer ZUWEISEN vom Array questions inhalte an postition 0 sein.
+    let rightAnswer = answer['right-answer']; // las rightAnswer ZUWEISEN aus (JOSN-Array pos 0) Fach 'right-Answer'.
+    let selectedAnswer = selection.slice(-1); //las selectedAnswer ZUWEISEN nur die letzte position von meinem STRING parameter sein (1 - 4).
+    if (rightAnswer == selectedAnswer) { // WENN rightAnswer ISTGLEICH selectedAnswer.
+        document.getElementById(selection).parentNode.classList.add('right-answer'); // weise dem übergeordneten TAG (Eltern) die classe 'right-answer' zu.
         console.log('Richtige Antwort');
-    } else {
-        document.getElementById(selection).parentNode.classList.add('wrong-answer');
+    } else { //SONST 
+        document.getElementById(selection).parentNode.classList.add('wrong-answer'); // weise dem übergeordneten TAG (Eltern) die classe 'wrong-answer' zu.
+        document.getElementById(`answer-${rightAnswer}`).parentNode.classList.add('right-answer'); // und zeige die Richtige Antwort an, durch die ID mit der richtigen nummer aus dem JSON-Array
         console.log('Falsche Antwort');
     }
+    document.getElementById('next-btn').disabled = false; // das Element mit der ID 'next-button' wird der Befehl disable(deaktiviert) ZUGEWIESEN false(falsch), und clickbar.
+    console.log('RightAnswer is: ' + rightAnswer);
 }
