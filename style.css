@@ -1,10 +1,17 @@
 body {
-    background-color: rgb(61, 41, 178) !important;
+    background-image: url(img/background.jpg);
 }
 
 .card-container {
+    margin: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+}
+
+.my-card-footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
