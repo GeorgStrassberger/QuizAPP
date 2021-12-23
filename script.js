@@ -81,3 +81,16 @@ function showAnswer() {
     document.getElementById('answer-3').innerHTML = showAnswer['answer-3'];
     document.getElementById('answer-4').innerHTML = showAnswer['answer-4'];
 }
+
+function answer(selection) {
+    let answer = questions[currentQuestion];
+    let rightAnswer = answer['right-answer'];
+    let selectedAnswer = selection.slice(-1);
+    if (rightAnswer == selectedAnswer) {
+        document.getElementById(selection).parentNode.classList.add('right-answer');
+        console.log('Richtige Antwort');
+    } else {
+        document.getElementById(selection).parentNode.classList.add('wrong-answer');
+        console.log('Falsche Antwort');
+    }
+}

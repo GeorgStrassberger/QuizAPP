@@ -15,3 +15,16 @@ body {
     display: flex;
     justify-content: space-between;
 }
+
+.answer-card:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.right-answer {
+    background-color: rgba(0, 225, 0, 0.5) !important;
+}
+
+.wrong-answer {
+    background-color: rgba(225, 0, 0, 0.5) !important;
+}
