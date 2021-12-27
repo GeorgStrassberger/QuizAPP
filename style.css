@@ -1,5 +1,7 @@
 body {
     background-image: url(img/background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .card-container {
@@ -27,4 +29,12 @@ body {
 
 .wrong-answer {
     background-color: rgba(225, 0, 0, 0.5) !important;
+}
+
+.tc {
+    text-align: center;
+}
+
+.win-border {
+    border: gold 5px solid !important;
 }

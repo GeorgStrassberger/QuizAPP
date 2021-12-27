@@ -29,8 +29,28 @@
         </div>
     </nav>
     <div class="card-container">
-        <div class="card" style="width: 25rem;">
-            <img src="/img/learning.jpg" class="card-img-top" alt="QuizBild">
+        <!-- Ende Layout-->
+        <div id="end-screen" class="card  win-border" style="width: 20rem; display: none;">
+            <img src="/img/trophy.png" class="card-img-top" alt="trophy">
+            <div class="card-body">
+                <!--Headline Text-->
+                <h5 id="" class="card-title tc">Quiz Ende</h5>
+                <!--Normel Text-->
+                <div class="card mb-2">
+                    <div class="card-body tc">
+                        <span>Herzlichen Glückwusch!</span>
+                        <p>Du Hast <b id="rightanswers">Y</b> Fragen richtig beantwortet.</p>
+                    </div>
+                </div>
+                <!--Seite & Button-->
+                <div class="my-card-footer ">
+                    <button class="btn btn-primary " type="button ">Beenden</button>
+                </div>
+            </div>
+        </div>
+        <!-- Fragen Layout-->
+        <div id="game-screen" class="card" style="width: 25rem;">
+            <img src="/img/learning.jpg " class="card-img-top " alt="QuizBild">
             <div class="card-body">
                 <!--Frage:-->
                 <h5 id="question" class="card-title">Frage:</h5>
@@ -48,7 +68,7 @@
                 </div>
                 <!--Antwort 3-->
                 <div class="card mb-2 answer-card" onclick="answer('answer-3')">
-                    <div id="answer-3" class="card-body ">
+                    <div id="answer-3" class="card-body">
                         Antwort 3
                     </div>
                 </div>
@@ -61,7 +81,7 @@
                 <!--Seite & Button-->
                 <div class="my-card-footer">
                     <span><b id="currentQuestionNr">x</b> von <b id="maxQuestionsNr">x</b></span>
-                    <button id="next-btn" class="btn btn-primary" type="button" disabled>Nächste Frage</button>
+                    <button id="next-btn" class="btn btn-primary" type="button" disabled onclick="nextQuestion()">Nächste Frage</button>
                 </div>
             </div>
         </div>

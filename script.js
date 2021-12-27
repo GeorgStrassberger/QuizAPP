@@ -40,46 +40,52 @@ let questions = [{
     },
     {
         "question": "Mit welchem HTML-Element wird ein Text kursiv geschrieben?",
-        "answer-1": "<i></i>",
-        "answer-2": "<k></k>",
-        "answer-3": "<b></b>",
-        "answer-4": "<r></r>",
+        "answer-1": "< i >..< / i >",
+        "answer-2": "< k >..< / k >",
+        "answer-3": "< b >..< / b >",
+        "answer-4": "< u >..< / u >",
         "right-answer": 1
     },
 ];
 
-let currentQuestion = 4;
+let currentQuestion = 0;
+let numberOfRightAnswers = 0;
 
 // führt alle fuctionen aus beim laden der Seite
 function init() {
-    showQuestion()
-    showAnswer()
-    currentQuestionNr()
+    showQuestion();
+    currentQuestionNr();
     maxQuestionsNr();
 }
 
-// Zeigt die Anzahl der Fragen an // show max questions
+// Zeigt die Anzahl der Seiten/Fragen an // show max questions
 function maxQuestionsNr() {
     document.getElementById('maxQuestionsNr').innerHTML = questions.length;
 }
 
-// Zeigt die Aktuelle Frage an //show curren question
+// Zeigt mir die Aktuelle Seite/Frage an
 function currentQuestionNr() {
     let question = currentQuestion + 1;
-    document.getElementById('currentQuestionNr').innerHTML = question;
+    if (question <= questions.length) {
+        document.getElementById('currentQuestionNr').innerHTML = question;
+    }
 }
-
+// Zeigt mir die Frage an
 function showQuestion() {
-    let showquestion = questions[currentQuestion];
-    document.getElementById('question').innerHTML = showquestion['question'];
-}
+    let question = questions[currentQuestion];
+    if (currentQuestion >= questions.length) {
+        // Show End Screen
+        document.getElementById('end-screen').style.display = ''; // Der wert wird leer geschrieben und dadurch nimmt er die auto einstellung.
+        document.getElementById('game-screen').style.display = `none`; // Fügt dem anderen conteiner display: none; hinzu und dadurch wird es ausgeblendet.
+        showRightAnswers();
 
-function showAnswer() {
-    let showAnswer = questions[currentQuestion]
-    document.getElementById('answer-1').innerHTML = showAnswer['answer-1'];
-    document.getElementById('answer-2').innerHTML = showAnswer['answer-2'];
-    document.getElementById('answer-3').innerHTML = showAnswer['answer-3'];
-    document.getElementById('answer-4').innerHTML = showAnswer['answer-4'];
+    } else {
+        document.getElementById('question').innerHTML = question['question'];
+        document.getElementById('answer-1').innerHTML = question['answer-1'];
+        document.getElementById('answer-2').innerHTML = question['answer-2'];
+        document.getElementById('answer-3').innerHTML = question['answer-3'];
+        document.getElementById('answer-4').innerHTML = question['answer-4'];
+    }
 }
 
 function answer(selection) { // funktion ANSWER erstellt und mit STRING parameter übergeben. 
@@ -88,6 +94,7 @@ function answer(selection) { // funktion ANSWER erstellt und mit STRING paramete
     let selectedAnswer = selection.slice(-1); //las selectedAnswer ZUWEISEN nur die letzte position von meinem STRING parameter sein (1 - 4).
     if (rightAnswer == selectedAnswer) { // WENN rightAnswer ISTGLEICH selectedAnswer.
         document.getElementById(selection).parentNode.classList.add('right-answer'); // weise dem übergeordneten TAG (Eltern) die classe 'right-answer' zu.
+        numberOfRightAnswers++;
         console.log('Richtige Antwort');
     } else { //SONST 
         document.getElementById(selection).parentNode.classList.add('wrong-answer'); // weise dem übergeordneten TAG (Eltern) die classe 'wrong-answer' zu.
@@ -96,4 +103,27 @@ function answer(selection) { // funktion ANSWER erstellt und mit STRING paramete
     }
     document.getElementById('next-btn').disabled = false; // das Element mit der ID 'next-button' wird der Befehl disable(deaktiviert) ZUGEWIESEN false(falsch), und clickbar.
     console.log('RightAnswer is: ' + rightAnswer);
+}
+
+// Button Nächste Frage
+function nextQuestion() {
+    currentQuestion++; // die aktuelle position im JOSN ARRAY wir erhöht
+    document.getElementById('next-btn').disabled = true; // der NEXT-BTN wird wieder deaktieviert
+
+    resetAnswers() // Function um die antworten zu reseten
+    showQuestion() // Function neu aufrufen mit der neuen Position
+    currentQuestionNr() // Function neu aufrufen mit der neuen Position
+    maxQuestionsNr(); // Function neu aufrufen mit der neuen Position
+
+}
+
+function resetAnswers() {
+    document.getElementById('answer-1').parentNode.classList.remove('right-answer', 'wrong-answer'); // allen Antworten werden die Classen wieder entfernt.
+    document.getElementById('answer-2').parentNode.classList.remove('right-answer', 'wrong-answer'); // allen Antworten werden die Classen wieder entfernt.
+    document.getElementById('answer-3').parentNode.classList.remove('right-answer', 'wrong-answer'); // allen Antworten werden die Classen wieder entfernt.
+    document.getElementById('answer-4').parentNode.classList.remove('right-answer', 'wrong-answer'); // allen Antworten werden die Classen wieder entfernt.
+}
+
+function showRightAnswers() {
+    document.getElementById('rightanswers').innerHTML = numberOfRightAnswers;
 }
