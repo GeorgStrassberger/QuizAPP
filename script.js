@@ -9,7 +9,7 @@ let questions = [{
     {
         "question": "Wie müssen HTML-Tags immer aussehen?",
         "answer-1": "( )..(/ )",
-        "answer-2": "< >..</ >",
+        "answer-2": "< >..< / >",
         "answer-3": "{ }..{/ }",
         "answer-4": "[ ]..[/ ]",
         "right-answer": 2
@@ -46,6 +46,22 @@ let questions = [{
         "answer-4": "< u >..< / u >",
         "right-answer": 1
     },
+    {
+        "question": "Wie greife ich auf eine class in CSS zu?",
+        "answer-1": " .class",
+        "answer-2": " class",
+        "answer-3": " #class",
+        "answer-4": " !class",
+        "right-answer": 1
+    },
+    {
+        "question": "Wofür steht HTML?",
+        "answer-1": "Firmenname",
+        "answer-2": "garnichts",
+        "answer-3": "Höchster Mühl",
+        "answer-4": "Hypertext Markup Language",
+        "right-answer": 4
+    },
 ];
 let percentRightQuestions = 0;
 let currentQuestion = 0;
@@ -65,6 +81,7 @@ function init() {
 function maxQuestionsNr() {
     document.getElementById('maxQuestionsNr').innerHTML = questions.length;
     document.getElementById('maxQuestionsNr2').innerHTML = questions.length;
+    document.getElementById('maxQuestionsNr3').innerHTML = questions.length;
 }
 
 // Zeigt mir die Aktuelle Seite/Frage an
@@ -79,7 +96,6 @@ function showQuestion() {
     let question = questions[currentQuestion];
     if (currentQuestion >= questions.length) {
         // Show End Screen
-
         document.getElementById('end-screen').style.display = ''; // Der wert wird leer geschrieben und dadurch nimmt er die auto einstellung.
         document.getElementById('game-screen').style.display = `none`; // Fügt dem anderen conteiner display: none; hinzu und dadurch wird es ausgeblendet.
         showRightAnswers();
@@ -105,12 +121,10 @@ function answer(selection) { // funktion ANSWER erstellt und mit STRING paramete
         document.getElementById(selection).parentNode.classList.add('right-answer'); // weise dem übergeordneten TAG (Eltern) die classe 'right-answer' zu.
         woohooSound.play();
         numberOfRightAnswers++;
-        console.log('Richtige Antwort');
     } else { //SONST 
         document.getElementById(selection).parentNode.classList.add('wrong-answer'); // weise dem übergeordneten TAG (Eltern) die classe 'wrong-answer' zu.
         document.getElementById(`answer-${rightAnswer}`).parentNode.classList.add('right-answer'); // und zeige die Richtige Antwort an, durch die ID mit der richtigen nummer aus dem JSON-Array
         neinSound.play();
-        console.log('Falsche Antwort');
     }
 
     document.getElementById('next-btn').disabled = false; // das Element mit der ID 'next-button' wird der Befehl disable(deaktiviert) ZUGEWIESEN false(falsch), und clickbar.
@@ -137,15 +151,14 @@ function resetAnswers() {
 
 function showRightAnswers() {
     document.getElementById('rightanswers').innerHTML = numberOfRightAnswers; // Anzahl der Richtig beantworteten Fragen.
-
     percentRightQuestions = Math.round((numberOfRightAnswers / questions.length) * 100); // Richtige fragen in % umrechnen und auf Ganze Zahl runden.
-    let halfPercent = ((questions.length / questions.length) / 2) * 100;
-    console.log('richtige %: ' + percentRightQuestions);
-    console.log('50%: ' + halfPercent);
-    if (percentRightQuestions > halfPercent) {
+
+    let halfPercent = ((questions.length / questions.length) / 2) * 100; // definiere mir eine neue Variable und rechne mir die hälfte aus. 
+
+    if (percentRightQuestions > halfPercent) { // WENN mehr als die Hälfte der Fragen richtig sind.
         document.getElementById('right-percent').innerHTML = `SUPER das sind ${percentRightQuestions} % `;
         document.getElementById('right-percent').style.color = 'green';
-    } else {
+    } else { // SONST sind weniger als die hälfte richtig 
         document.getElementById('right-percent').innerHTML = `Das sind NUR ${percentRightQuestions} %`;
         document.getElementById('right-percent').style.color = 'red';
     }
@@ -157,4 +170,10 @@ function restart() {
 // Aktueller TAP / FENSTER wird geschlossen
 function closeWindow() {
     window.close();
+}
+
+function start() {
+    document.getElementById('start-screen').style.display = 'none';
+    document.getElementById('end-screen').style.display = 'none';
+    document.getElementById('game-screen').style.display = ``;
 }

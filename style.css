@@ -2,6 +2,7 @@ body {
     background-image: url(img/background2.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: unset;
 }
 
 .img-container {
@@ -24,14 +25,11 @@ body {
     justify-content: space-between;
 }
 
-
-/*
 .my-card-footer-end {
     width: 100%;
     display: flex;
     justify-content: end;
 }
-*/
 
 .answer-card:hover {
     cursor: pointer;

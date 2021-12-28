@@ -29,6 +29,28 @@
         </div>
     </nav>
     <div class="card-container">
+        <!--Start Layout-->
+        <div id="start-screen" class="card no-border" style="width: 25rem;">
+            <div class="img-container">
+                <img src="/img/background3.jpg" class="card-img-top" style="width: 100%;" alt="trophy">
+            </div>
+            <div class="card-body">
+                <!--Headline Text-->
+                <h2 id="" class="card-title tc">HML / CSS Quiz</h2>
+                <!--Normel Text-->
+                <div class="card mb-2">
+                    <div class="card-body tc">
+                        <h5>Herzlich Willkommen</h5>
+                        <span>Hier kannst du <b id="maxQuestionsNr">XXX</b> Fragen zu HTML & CSS beantwortet.</span>
+                        <span><b id="right-percent"></b></span>
+                    </div>
+                </div>
+                <!--Seite & Button-->
+                <div class="my-card-footer-end">
+                    <button onclick="start()" class="btn btn-primary" type="button ">Quiz Starten</button>
+                </div>
+            </div>
+        </div>
         <!-- Ende Layout-->
         <div id="end-screen" class="card  win-border" style="width: 25rem; display: none;">
             <div class="img-container">
@@ -41,7 +63,7 @@
                 <div class="card mb-2">
                     <div class="card-body tc">
                         <h5>Herzlichen Glückwusch!</h5>
-                        <span>Du Hast <b id="rightanswers">Y</b> von <b id="maxQuestionsNr2">YX</b> Fragen richtig beantwortet.</span>
+                        <span>Du Hast <b id="rightanswers">Y</b> von <b id="maxQuestionsNr3">YX</b> Fragen richtig beantwortet.</span>
                         <span><b id="right-percent"></b></span>
                     </div>
                 </div>
@@ -53,7 +75,7 @@
             </div>
         </div>
         <!-- Fragen Layout-->
-        <div id="game-screen" class="card no-border" style="width: 25rem;">
+        <div id="game-screen" class="card no-border" style="width: 25rem; display: none;">
             <img src="/img/learning.jpg " class="card-img-top " alt="QuizBild">
             <!--PROGRESS BAR-->
             <div class="progress">
@@ -88,7 +110,7 @@
                 </div>
                 <!--Seite & Button-->
                 <div class="my-card-footer">
-                    <span><b id="currentQuestionNr">x</b> von <b id="maxQuestionsNr">x</b></span>
+                    <span><b id="currentQuestionNr">x</b> von <b id="maxQuestionsNr2">x</b></span>
                     <button id="next-btn" class="btn btn-primary" type="button" disabled onclick="nextQuestion()">Nächste Frage</button>
                 </div>
             </div>
