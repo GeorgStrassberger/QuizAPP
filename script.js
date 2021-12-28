@@ -51,6 +51,8 @@ let percentRightQuestions = 0;
 let currentQuestion = 0;
 let numberOfRightAnswers = 0;
 let progress = 0;
+let neinSound = new Audio('audio/Homer NEIN!.mp3');
+let woohooSound = new Audio('audio/Homer Simpson Woohoo.mp3');
 
 // führt alle fuctionen aus beim laden der Seite
 function init() {
@@ -101,11 +103,13 @@ function answer(selection) { // funktion ANSWER erstellt und mit STRING paramete
 
     if (rightAnswer == selectedAnswer) { // WENN rightAnswer ISTGLEICH selectedAnswer.
         document.getElementById(selection).parentNode.classList.add('right-answer'); // weise dem übergeordneten TAG (Eltern) die classe 'right-answer' zu.
+        woohooSound.play();
         numberOfRightAnswers++;
         console.log('Richtige Antwort');
     } else { //SONST 
         document.getElementById(selection).parentNode.classList.add('wrong-answer'); // weise dem übergeordneten TAG (Eltern) die classe 'wrong-answer' zu.
         document.getElementById(`answer-${rightAnswer}`).parentNode.classList.add('right-answer'); // und zeige die Richtige Antwort an, durch die ID mit der richtigen nummer aus dem JSON-Array
+        neinSound.play();
         console.log('Falsche Antwort');
     }
 
@@ -139,14 +143,18 @@ function showRightAnswers() {
     console.log('richtige %: ' + percentRightQuestions);
     console.log('50%: ' + halfPercent);
     if (percentRightQuestions > halfPercent) {
-        document.getElementById('right-percent').innerHTML = `SUPER das sind${percentRightQuestions} % `;
+        document.getElementById('right-percent').innerHTML = `SUPER das sind ${percentRightQuestions} % `;
         document.getElementById('right-percent').style.color = 'green';
     } else {
         document.getElementById('right-percent').innerHTML = `Das sind NUR ${percentRightQuestions} %`;
         document.getElementById('right-percent').style.color = 'red';
     }
 }
-
+// Startet die Seite neu 
 function restart() {
     location.reload();
+}
+// Aktueller TAP / FENSTER wird geschlossen
+function closeWindow() {
+    window.close();
 }
