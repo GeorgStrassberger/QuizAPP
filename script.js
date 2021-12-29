@@ -15,7 +15,7 @@ let questions = [{
         "right-answer": 2
     },
     {
-        "question": "Was braucht man um HTML zu arbeiten?",
+        "question": "Was braucht man um HTML zu bearbeiten?",
         "answer-1": "Editor",
         "answer-2": "Microsoft Word",
         "answer-3": "Microsoft Exel",
@@ -63,12 +63,15 @@ let questions = [{
         "right-answer": 4
     },
 ];
+
+let myWindow;
 let percentRightQuestions = 0;
 let currentQuestion = 0;
 let numberOfRightAnswers = 0;
 let progress = 0;
 let neinSound = new Audio('audio/Homer NEIN!.mp3');
 let woohooSound = new Audio('audio/Homer Simpson Woohoo.mp3');
+let halfPercent = 0;
 
 // führt alle fuctionen aus beim laden der Seite
 function init() {
@@ -93,23 +96,34 @@ function currentQuestionNr() {
 }
 // Zeigt mir die Frage an
 function showQuestion() {
-    let question = questions[currentQuestion];
     if (currentQuestion >= questions.length) {
-        // Show End Screen
-        document.getElementById('end-screen').style.display = ''; // Der wert wird leer geschrieben und dadurch nimmt er die auto einstellung.
-        document.getElementById('game-screen').style.display = `none`; // Fügt dem anderen conteiner display: none; hinzu und dadurch wird es ausgeblendet.
-        showRightAnswers();
-
+        showEndScreen();
     } else { // Show Question
-        progress = Math.round(((currentQuestion + 1) / questions.length) * 100); // progress wird der WERT zugewisen von der gerundeten Rechnung ((0+1) / 7) * 100 . 
-        document.getElementById('progress-bar').style.width = `${progress}%`;
-        document.getElementById('progress-bar').innerHTML = `${progress}%`;
-        document.getElementById('question').innerHTML = question['question'];
-        document.getElementById('answer-1').innerHTML = question['answer-1'];
-        document.getElementById('answer-2').innerHTML = question['answer-2'];
-        document.getElementById('answer-3').innerHTML = question['answer-3'];
-        document.getElementById('answer-4').innerHTML = question['answer-4'];
+        progressBar();
+        showNextQuestion()
     }
+}
+
+function showEndScreen() {
+    document.getElementById('start-screen').style.display = 'none';
+    document.getElementById('game-screen').style.display = `none`; // Fügt dem anderen conteiner display: none; hinzu und dadurch wird es ausgeblendet.
+    document.getElementById('end-screen').style.display = ''; // Der wert wird leer geschrieben und dadurch nimmt er die auto einstellung.
+    showRightAnswers();
+}
+
+function progressBar() {
+    progress = Math.round(((currentQuestion + 1) / questions.length) * 100); // progress wird der WERT zugewisen von der gerundeten Rechnung ((0+1) / 7) * 100 . 
+    document.getElementById('progress-bar').style.width = `${progress}%`;
+    document.getElementById('progress-bar').innerHTML = `${progress}%`;
+}
+
+function showNextQuestion() {
+    let question = questions[currentQuestion];
+    document.getElementById('question').innerHTML = question['question'];
+    document.getElementById('answer-1').innerHTML = question['answer-1'];
+    document.getElementById('answer-2').innerHTML = question['answer-2'];
+    document.getElementById('answer-3').innerHTML = question['answer-3'];
+    document.getElementById('answer-4').innerHTML = question['answer-4'];
 }
 
 function answer(selection) { // funktion ANSWER erstellt und mit STRING parameter übergeben. 
@@ -126,11 +140,9 @@ function answer(selection) { // funktion ANSWER erstellt und mit STRING paramete
         document.getElementById(`answer-${rightAnswer}`).parentNode.classList.add('right-answer'); // und zeige die Richtige Antwort an, durch die ID mit der richtigen nummer aus dem JSON-Array
         neinSound.play();
     }
-
     document.getElementById('next-btn').disabled = false; // das Element mit der ID 'next-button' wird der Befehl disable(deaktiviert) ZUGEWIESEN false(falsch), und clickbar.
 }
 
-// Button Nächste Frage
 function nextQuestion() {
     currentQuestion++; // die aktuelle position im JOSN ARRAY wir erhöht
     document.getElementById('next-btn').disabled = true; // der NEXT-BTN wird wieder deaktieviert
@@ -151,9 +163,9 @@ function resetAnswers() {
 
 function showRightAnswers() {
     document.getElementById('rightanswers').innerHTML = numberOfRightAnswers; // Anzahl der Richtig beantworteten Fragen.
-    percentRightQuestions = Math.round((numberOfRightAnswers / questions.length) * 100); // Richtige fragen in % umrechnen und auf Ganze Zahl runden.
 
-    let halfPercent = ((questions.length / questions.length) / 2) * 100; // definiere mir eine neue Variable und rechne mir die hälfte aus. 
+    percentRightQuestions = Math.round((numberOfRightAnswers / questions.length) * 100); // Richtige fragen in % umrechnen und auf Ganze Zahl runden.
+    halfPercent = (questions.length / 2) * 10; // definiere mir eine neue Variable und rechne mir die hälfte aus. 
 
     if (percentRightQuestions > halfPercent) { // WENN mehr als die Hälfte der Fragen richtig sind.
         document.getElementById('right-percent').innerHTML = `SUPER das sind ${percentRightQuestions} % `;
@@ -163,13 +175,22 @@ function showRightAnswers() {
         document.getElementById('right-percent').style.color = 'red';
     }
 }
-// Startet die Seite neu 
+
 function restart() {
-    location.reload();
+    percentRightQuestions = 0;
+    currentQuestion = 0;
+    numberOfRightAnswers = 0;
+    progress = 0;
+    start();
+    init();
+    //    location.reload();
 }
-// Aktueller TAP / FENSTER wird geschlossen
+
 function closeWindow() {
-    window.close();
+    document.getElementById('start-screen').style.display = 'none';
+    document.getElementById('end-screen').style.display = 'none';
+    document.getElementById('game-screen').style.display = `none`;
+    //    myWindow.close();
 }
 
 function start() {

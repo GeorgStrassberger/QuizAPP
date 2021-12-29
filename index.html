@@ -32,7 +32,7 @@
         <!--Start Layout-->
         <div id="start-screen" class="card no-border" style="width: 25rem;">
             <div class="img-container">
-                <img src="/img/background3.jpg" class="card-img-top" style="width: 100%;" alt="trophy">
+                <img src="img/background3.jpg" class="card-img-top" style="width: 100%;" alt="StartImg">
             </div>
             <div class="card-body">
                 <!--Headline Text-->
@@ -42,7 +42,6 @@
                     <div class="card-body tc">
                         <h5>Herzlich Willkommen</h5>
                         <span>Hier kannst du <b id="maxQuestionsNr">XXX</b> Fragen zu HTML & CSS beantwortet.</span>
-                        <span><b id="right-percent"></b></span>
                     </div>
                 </div>
                 <!--Seite & Button-->
@@ -51,32 +50,9 @@
                 </div>
             </div>
         </div>
-        <!-- Ende Layout-->
-        <div id="end-screen" class="card  win-border" style="width: 25rem; display: none;">
-            <div class="img-container">
-                <img src="/img/trophy.png" class="card-img-top" style="width: 70%;" alt="trophy">
-            </div>
-            <div class="card-body">
-                <!--Headline Text-->
-                <h2 id="" class="card-title tc">Quiz Ende</h2>
-                <!--Normel Text-->
-                <div class="card mb-2">
-                    <div class="card-body tc">
-                        <h5>Herzlichen Glückwusch!</h5>
-                        <span>Du Hast <b id="rightanswers">Y</b> von <b id="maxQuestionsNr3">YX</b> Fragen richtig beantwortet.</span>
-                        <span><b id="right-percent"></b></span>
-                    </div>
-                </div>
-                <!--Seite & Button-->
-                <div class="my-card-footer">
-                    <button onclick="restart()" class="btn btn-primary" type="button ">Nochmal Versuchen</button>
-                    <button onclick="closeWindow()" class="btn btn-primary" type="button ">Beenden</button>
-                </div>
-            </div>
-        </div>
         <!-- Fragen Layout-->
         <div id="game-screen" class="card no-border" style="width: 25rem; display: none;">
-            <img src="/img/learning.jpg " class="card-img-top " alt="QuizBild">
+            <img src="img/learning.jpg " class="card-img-top " alt="QuizBild">
             <!--PROGRESS BAR-->
             <div class="progress">
                 <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;">25%</div>
@@ -115,6 +91,30 @@
                 </div>
             </div>
         </div>
+        <!-- Ende Layout-->
+        <div id="end-screen" class="card  win-border" style="width: 25rem; display: none;">
+            <div class="img-container">
+                <img src="img/trophy.png" class="card-img-top" style="width: 70%;" alt="trophy">
+            </div>
+            <div class="card-body">
+                <!--Headline Text-->
+                <h2 id="" class="card-title tc">Quiz Ende</h2>
+                <!--Normel Text-->
+                <div class="card mb-2">
+                    <div class="card-body tc">
+                        <h5>Herzlichen Glückwusch!</h5>
+                        <span>Du Hast <b id="rightanswers">Y</b> von <b id="maxQuestionsNr3">YX</b> Fragen richtig beantwortet.</span>
+                        <span><b id="right-percent">asd</b></span>
+                    </div>
+                </div>
+                <!--Seite & Button-->
+                <div class="my-card-footer">
+                    <button onclick="restart()" class="btn btn-primary" type="button ">Nochmal Versuchen</button>
+                    <button onclick="closeWindow()" class="btn btn-primary" type="button">Beenden</button>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 
